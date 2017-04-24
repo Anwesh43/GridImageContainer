@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 
+import com.anwesome.ui.gridimagecontainer.GridImageContainer;
 import com.anwesome.ui.gridimagecontainer.ImageContainer;
 import com.anwesome.ui.gridimagecontainer.ImageContainerView;
 
@@ -15,9 +16,9 @@ public class ViewAnimationController implements Animator.AnimatorListener,ValueA
     private ValueAnimator expandAnimator = ValueAnimator.ofFloat(0,1);
     private ValueAnimator shrinkAnimator = ValueAnimator.ofFloat(1,0);
     private int dir = 0;
-    private Activity activity;
-    public ViewAnimationController(Activity activity,ImageContainer imageContainer) {
-        this.activity = activity;
+    private GridImageContainer gridImageContainer;
+    public ViewAnimationController(GridImageContainer gridImageContainer, ImageContainer imageContainer) {
+        this.gridImageContainer = gridImageContainer;
         this.imageContainer = imageContainer;
         expandAnimator.setDuration(500);
         shrinkAnimator.setDuration(500);
@@ -32,7 +33,7 @@ public class ViewAnimationController implements Animator.AnimatorListener,ValueA
     }
     public void onAnimationEnd(Animator animator) {
         if(dir == 1) {
-            activity.setContentView(imageContainer.getImageContainerView());
+           gridImageContainer.setImageContainerViewAsMainView(imageContainer.getImageContainerView());
         }
         dir = 0;
     }
@@ -50,6 +51,12 @@ public class ViewAnimationController implements Animator.AnimatorListener,ValueA
             dir = 1;
             imageContainer.getImageContainerView().bringToFront();
             expandAnimator.start();
+        }
+    }
+    public void shrink() {
+        if(dir == 0) {
+            dir = -1;
+            shrinkAnimator.start();
         }
     }
 }
