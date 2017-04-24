@@ -15,11 +15,11 @@ public class ImageElement {
         this.size = size;
         this.x = x;
         this.y = y;
-        this.bitmap = Bitmap.createScaledBitmap(bitmap,(int)size/2,(int)size/2,true);
+        this.bitmap = Bitmap.createScaledBitmap(bitmap,(int)size,(int)size,true);
     }
     public void draw(Canvas canvas, Paint paint) {
         canvas.save();
-        canvas.translate(x,y);
+        canvas.translate(x+size/2,y+size/2);
         canvas.rotate(deg);
         canvas.drawBitmap(bitmap,-size/2,-size/2,paint);
         canvas.restore();

@@ -19,6 +19,7 @@ import java.util.List;
 public class ImageContainerView extends View{
     private List<ImageElement> imageElements = new ArrayList<>();
     private int time = 0;
+    private float maxH = 0,h;
     private AnimationController animationController;
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     public ImageContainerView(Context context) {
@@ -26,8 +27,21 @@ public class ImageContainerView extends View{
     }
     public void onDraw(Canvas canvas) {
         canvas.drawColor(Color.parseColor("#99616161"));
+        int w = canvas.getWidth(),gap = w/7,x = 3*gap/2,y = 3*gap/2;
+        h = canvas.getHeight();
+        int i = 0;
         if(time == 0) {
             animationController = new AnimationController(this,imageElements);
+            for(ImageElement imageElement:imageElements) {
+                imageElement.setDimension(x,y,gap);
+                i++;
+                x += 2*gap;
+                if(i == 3) {
+                    i = 0;
+                    x = 3*gap/2;
+                    y+=3*gap/2;
+                }
+            }
         }
         for(ImageElement imageElement:imageElements) {
             imageElement.draw(canvas,paint);
