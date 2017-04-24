@@ -26,6 +26,13 @@ public class ImageElement {
     }
     public void update() {
         deg+=dir*20;
+        if(deg >= 360) {
+            deg = 0;
+            dir = 0;
+        }
+    }
+    public boolean stopped() {
+        return dir == 0;
     }
     public boolean handleTap(float x,float y) {
         if(x>=this.x-this.size/2 && x<=this.x+this.size/2 && y>=this.y-size/2 && y<=this.y+size/2 && dir == 0) {
