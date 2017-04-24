@@ -40,13 +40,10 @@ public class GridImageContainer {
         imageContainerView.setImageElement(bitmaps);
         ImageContainer imageContainer = new ImageContainer(imageContainerView,x,y);
         final ViewAnimationController viewAnimationController = new ViewAnimationController(this,imageContainer);
-        imageContainerView.setOnTouchListener(new View.OnTouchListener() {
+        imageContainerView.setOnTouchShrinkListener(new ImageContainerView.OnTouchShrinkListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    viewAnimationController.expand();
-                }
-                return false;
+            public void onTouch() {
+                viewAnimationController.expand();
             }
         });
         relativeLayout.addView(imageContainerView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));

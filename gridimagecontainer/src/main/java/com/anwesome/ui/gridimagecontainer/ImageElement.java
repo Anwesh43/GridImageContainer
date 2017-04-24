@@ -35,8 +35,9 @@ public class ImageElement {
         return dir == 0;
     }
     public boolean handleTap(float x,float y) {
-        if(x>=this.x-this.size/2 && x<=this.x+this.size/2 && y>=this.y-size/2 && y<=this.y+size/2 && dir == 0) {
+        if(x>=this.x-this.size && x<=this.x+this.size && y>=this.y-size && y<=this.y+size && dir == 0) {
             dir = 1;
+            return true;
         }
         return false;
     }

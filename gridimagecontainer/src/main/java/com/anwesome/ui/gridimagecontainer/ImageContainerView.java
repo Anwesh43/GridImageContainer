@@ -18,10 +18,18 @@ import java.util.List;
  */
 public class ImageContainerView extends View{
     private List<ImageElement> imageElements = new ArrayList<>();
+    private boolean shrinked = true;
     private int time = 0;
     private float maxH = 0,h;
     private AnimationController animationController;
+    private OnTouchShrinkListener onTouchShrinkListener;
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    public interface OnTouchShrinkListener {
+        void onTouch();
+    }
+    public void setOnTouchShrinkListener(OnTouchShrinkListener onTouchShrinkListener) {
+        this.onTouchShrinkListener = onTouchShrinkListener;
+    }
     public ImageContainerView(Context context) {
         super(context);
     }
@@ -55,8 +63,12 @@ public class ImageContainerView extends View{
         }
     }
     public boolean onTouchEvent(MotionEvent event) {
-        if(event.getAction() == MotionEvent.ACTION_DOWN && animationController != null) {
+        if(event.getAction() == MotionEvent.ACTION_DOWN && animationController != null && !shrinked) {
             animationController.handleTap(event.getX(),event.getY());
+        }
+        else if(shrinked && onTouchShrinkListener!=null && event.getAction() == MotionEvent.ACTION_DOWN){
+            onTouchShrinkListener.onTouch();
+            shrinked = false;
         }
         return true;
     }
