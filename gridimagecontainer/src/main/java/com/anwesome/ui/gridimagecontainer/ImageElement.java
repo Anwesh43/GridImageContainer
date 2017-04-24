@@ -40,4 +40,7 @@ public class ImageElement {
         }
         return false;
     }
+    public int hashCode() {
+        return (int)(x+y+deg)+bitmap.hashCode();
+    }
 }
