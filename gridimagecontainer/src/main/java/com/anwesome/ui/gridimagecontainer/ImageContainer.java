@@ -22,10 +22,14 @@ public class ImageContainer {
     }
     public void updateScale(float factor) {
         this.scale = 0.2f+0.8f*factor;
+        imageContainerView.setScaleX(scale);
+        imageContainerView.setScaleY(scale);
     }
     public void updateXY(float factor) {
         x = initX*(1-factor);
         y = initY*(1-factor);
+        imageContainerView.setX(x);
+        imageContainerView.setY(y);
     }
     public static ImageContainer create(ImageContainerView imageContainerView, float x, float y) {
         return new ImageContainer(imageContainerView,x,y);
