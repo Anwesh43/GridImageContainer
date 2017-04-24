@@ -2,6 +2,7 @@ package com.anwesome.ui.gridimagecontainer;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,6 +24,7 @@ public class ImageContainerView extends View{
         super(context);
     }
     public void onDraw(Canvas canvas) {
+        canvas.drawColor(Color.parseColor("#99616161"));
         if(time == 0) {
             animationController = new AnimationController(this,imageElements);
         }
