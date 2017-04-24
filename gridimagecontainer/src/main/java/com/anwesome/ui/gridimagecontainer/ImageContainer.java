@@ -17,6 +17,10 @@ public class ImageContainer {
         this.initY = y;
         this.imageContainerView = imageContainerView;
     }
+
+    public ImageContainerView getImageContainerView() {
+        return imageContainerView;
+    }
     public float getScale() {
         return scale;
     }
