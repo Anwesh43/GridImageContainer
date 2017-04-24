@@ -39,8 +39,15 @@ public class AnimationController {
         }
     }
     public void handleTap(float x,float y) {
-        if(!isAnimated) {
-
+        for(ImageElement imageElement:imageElements) {
+            if(imageElement.handleTap(x,y)) {
+                boolean firstTappedElement = tappedElements.size() == 0;
+                tappedElements.add(imageElement);
+                if(firstTappedElement) {
+                    isAnimated = true;
+                    view.postInvalidate();
+                }
+            }
         }
     }
 }
