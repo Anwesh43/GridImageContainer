@@ -14,11 +14,12 @@ import java.util.List;
 public class GridImageContainer {
     private Activity activity;
     private RelativeLayout relativeLayout;
-    private List<ImageContainerView> imageContainerViews = new ArrayList<>();
+    private List<ImageContainer> imageContainers = new ArrayList<>();
     private boolean isShown = false;
     public GridImageContainer(Activity activity) {
         this.activity = activity;
         relativeLayout = new RelativeLayout(activity);
+        activity.setContentView(relativeLayout);
     }
     public void addImages(List<Bitmap> bitmaps,float x,float y) {
         if(!isShown) {
@@ -27,7 +28,9 @@ public class GridImageContainer {
             imageContainerView.setY(y);
             imageContainerView.setScaleX(0.2f);
             imageContainerView.setScaleY(0.2f);
-            activity.addContentView(imageContainerView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            relativeLayout.addView(imageContainerView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            ImageContainer imageContainer = new ImageContainer(imageContainerView,x,y);
+            imageContainers.add(imageContainer);
         }
     }
 
