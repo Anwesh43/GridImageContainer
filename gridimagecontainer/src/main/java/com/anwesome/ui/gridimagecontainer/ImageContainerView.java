@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.anwesome.ui.gridimagecontainer.controller.AnimationController;
+import com.anwesome.ui.gridimagecontainer.controller.ViewAnimationController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,5 +72,8 @@ public class ImageContainerView extends View{
             shrinked = false;
         }
         return true;
+    }
+    public void setShrinked() {
+        shrinked = true;
     }
 }

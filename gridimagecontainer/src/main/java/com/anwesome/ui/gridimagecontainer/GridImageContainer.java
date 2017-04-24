@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class GridImageContainer {
     private Activity activity;
+    private ViewAnimationController currController = null;
     private RelativeLayout relativeLayout;
     private List<ImageContainer> imageContainers = new ArrayList<>();
     private boolean isShown = false;
@@ -43,11 +44,26 @@ public class GridImageContainer {
         imageContainerView.setOnTouchShrinkListener(new ImageContainerView.OnTouchShrinkListener() {
             @Override
             public void onTouch() {
-                viewAnimationController.expand();
+                if(currController == null) {
+                    viewAnimationController.expand();
+                    currController = viewAnimationController;
+                }
             }
         });
         relativeLayout.addView(imageContainerView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         imageContainers.add(imageContainer);
     }
-
+    public boolean handleShrink() {
+        if(currController!=null) {
+            currController.shrink();
+            currController = null;
+            return true;
+        }
+        return false;
+    }
+    public void makingTheParentLayoutMain(ImageContainerView imageContainerView) {
+        imageContainerView.setShrinked();
+        activity.setContentView(relativeLayout);
+        relativeLayout.addView(imageContainerView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+    }
 }

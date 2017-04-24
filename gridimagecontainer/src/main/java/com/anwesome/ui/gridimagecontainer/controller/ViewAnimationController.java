@@ -35,6 +35,9 @@ public class ViewAnimationController implements Animator.AnimatorListener,ValueA
         if(dir == 1) {
            gridImageContainer.setImageContainerViewAsMainView(imageContainer.getImageContainerView());
         }
+        else {
+            gridImageContainer.makingTheParentLayoutMain(imageContainer.getImageContainerView());
+        }
         dir = 0;
     }
     public void onAnimationRepeat(Animator animator) {
