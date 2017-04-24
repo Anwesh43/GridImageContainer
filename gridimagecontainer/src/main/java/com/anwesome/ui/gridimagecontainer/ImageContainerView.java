@@ -1,6 +1,7 @@
 package com.anwesome.ui.gridimagecontainer;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -33,6 +34,11 @@ public class ImageContainerView extends View{
         }
         time++;
         animationController.animate();
+    }
+    public void setImageElement(List<Bitmap> bitmaps) {
+        for(Bitmap bitmap:bitmaps) {
+            imageElements.add(new ImageElement(bitmap));
+        }
     }
     public boolean onTouchEvent(MotionEvent event) {
         if(event.getAction() == MotionEvent.ACTION_DOWN && animationController != null) {
