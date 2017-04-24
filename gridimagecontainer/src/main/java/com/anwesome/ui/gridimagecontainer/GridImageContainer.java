@@ -2,8 +2,11 @@ package com.anwesome.ui.gridimagecontainer;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+
+import com.anwesome.ui.gridimagecontainer.controller.ViewAnimationController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +25,21 @@ public class GridImageContainer {
         activity.setContentView(relativeLayout);
     }
     public void addImages(List<Bitmap> bitmaps,float x,float y) {
-        if(!isShown) {
-            ImageContainerView imageContainerView = new ImageContainerView(activity);
-            imageContainerView.setX(x);
-            imageContainerView.setY(y);
-            imageContainerView.setScaleX(0.2f);
-            imageContainerView.setScaleY(0.2f);
-            relativeLayout.addView(imageContainerView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            ImageContainer imageContainer = new ImageContainer(imageContainerView,x,y);
-            imageContainers.add(imageContainer);
-        }
+        ImageContainerView imageContainerView = new ImageContainerView(activity);
+        imageContainerView.setX(x);
+        imageContainerView.setY(y);
+        imageContainerView.setScaleX(0.2f);
+        imageContainerView.setScaleY(0.2f);
+        relativeLayout.addView(imageContainerView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        ImageContainer imageContainer = new ImageContainer(imageContainerView,x,y);
+        final ViewAnimationController viewAnimationController = new ViewAnimationController(activity,imageContainer);
+        imageContainerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewAnimationController.expand();
+            }
+        });
+        imageContainers.add(imageContainer);
     }
 
 }

@@ -45,4 +45,11 @@ public class ViewAnimationController implements Animator.AnimatorListener,ValueA
     public void onAnimationCancel(Animator animator) {
 
     }
+    public void expand() {
+        if(dir == 0) {
+            dir = 1;
+            imageContainer.getImageContainerView().bringToFront();
+            expandAnimator.start();
+        }
+    }
 }
